@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import UseAuth from "../hooks/UseAuth";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import SocialLogIn from "./SocialLogIn";
 import axios from "axios";
 
@@ -13,6 +13,9 @@ const SignUp = () => {
   } = useForm();
 
   const { signUpUser, updateUserProfile } = UseAuth();
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleRegister = (data) => {
     console.log(data.image[0]);
@@ -39,6 +42,7 @@ const SignUp = () => {
           updateUserProfile(userProfile)
             .then(() => {
               console.log("user profile updated done");
+              navigate(location?.state || "/");
             })
             .catch((error) => {
               console.log(error);
@@ -51,7 +55,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="w-5/5  md:w-3/5 mx-auto border-r-0 md:border-r-2 border-[#CAEB66] py-3 pr-3 rounded-2xl">
+    <div className="w-5/5  md:w-4/5 mx-auto border-r-0 md:border-r-2 border-[#CAEB66] py-3 pr-3 rounded-2xl">
       <p className="font-bold text-3xl text-center mb-3">New to ZapShift?</p>
       <p className="text-center mb-6">Sign Up with Zapshift</p>
       <form onSubmit={handleSubmit(handleRegister)}>

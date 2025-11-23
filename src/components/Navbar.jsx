@@ -28,7 +28,10 @@ const Navbar = () => {
         {" "}
         <NavLink to={"/aboutUs"}>About Us</NavLink>
       </li>
-      <li className="text-[#8ebd00] font-bold">
+      <li>
+        <NavLink to={"/sendParcel"}>Send Parcel</NavLink>
+      </li>
+      <li className=" font-bold">
         <NavLink to={"/beArider"}>Be a Rider</NavLink>
       </li>
     </>

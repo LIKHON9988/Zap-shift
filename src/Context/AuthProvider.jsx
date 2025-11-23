@@ -8,6 +8,9 @@ import {
   signInWithPopup,
   signOut,
   updateProfile,
+  sendPasswordResetEmail,
+  verifyPasswordResetCode,
+  confirmPasswordReset,
 } from "firebase/auth";
 import { auth } from "../firebaseFile/firebaseConfig";
 
@@ -40,6 +43,22 @@ const AuthProvider = ({ children }) => {
   const updateUserProfile = (profile) => {
     return updateProfile(auth.currentUser, profile);
   };
+
+  const requestPasswordReset = (email) => {
+    setLoading(true);
+    const url = `${window.location.origin}/enterCode`;
+    return sendPasswordResetEmail(auth, email, { url, handleCodeInApp: true });
+  };
+
+  const verifyResetCode = (code) => {
+    setLoading(true);
+    return verifyPasswordResetCode(auth, code);
+  };
+
+  const confirmReset = (code, newPassword) => {
+    setLoading(true);
+    return confirmPasswordReset(auth, code, newPassword);
+  };
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -58,6 +77,9 @@ const AuthProvider = ({ children }) => {
     SignInWithGoogle,
     logOut,
     updateUserProfile,
+    requestPasswordReset,
+    verifyResetCode,
+    confirmReset,
   };
 
   return <AuthContext value={authInfo}>{children}</AuthContext>;

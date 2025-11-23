@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import UseAuth from "../hooks/UseAuth";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import SocialLogIn from "./SocialLogIn";
 
 const LogIn = () => {
@@ -13,11 +13,15 @@ const LogIn = () => {
 
   const { LogInUser } = UseAuth();
 
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const handleLogIn = (data) => {
     console.log(data);
     LogInUser(data.email, data.password)
       .then((ressult) => {
         console.log(ressult);
+        navigate(location?.state || "/");
       })
       .catch((error) => {
         console.log(error);
@@ -25,7 +29,7 @@ const LogIn = () => {
   };
 
   return (
-    <div className="w-5/5  md:w-3/5 mx-auto border-r-0 md:border-r-2 border-[#CAEB66] py-3 pr-3 rounded-2xl">
+    <div className="w-5/5  md:w-4/5 mx-auto border-r-0 md:border-r-2 border-[#CAEB66] py-3 pr-3 rounded-2xl">
       <p className="font-bold text-3xl text-center mb-3">Welcome back</p>
       <p className="text-center mb-6">Login with ZapShift</p>
       <form onSubmit={handleSubmit(handleLogIn)}>
@@ -76,10 +80,14 @@ const LogIn = () => {
             </p>
           )}
           <div className="flex justify-between ">
-            <a className="link link-hover">Forgot password?</a>
+            <Link to="/forgotPassword" className="link link-hover">Forgot password?</Link>
             <p>
               New to zap shift?{" "}
-              <Link to={"/signUp"} className="underline text-[#80aa04]">
+              <Link
+                state={location.state}
+                to={"/signUp"}
+                className="underline text-[#80aa04]"
+              >
                 Sign Up
               </Link>
             </p>
