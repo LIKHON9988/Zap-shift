@@ -2,7 +2,7 @@ import axios from "axios";
 import React from "react";
 
 const axiosSequre = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://zap-shift-server-sigma.vercel.app",
 });
 
 const UseAxios = () => {
