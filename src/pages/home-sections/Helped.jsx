@@ -16,6 +16,7 @@ const Helped = () => {
   return (
     <>
       <Swiper
+        className="mb-24"
         loop={true}
         slidesPerView={4}
         centeredSlides={true}

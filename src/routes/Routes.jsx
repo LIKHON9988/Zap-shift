@@ -12,6 +12,8 @@ import EnterCode from "../pages/EnterCode";
 import ResetPassword from "../pages/ResetPassword";
 import ForgotPassword from "../pages/ForgotPassword";
 import SendParcel from "../pages/SendParcel";
+import Dashboard from "../Layout/Dashboard";
+import MyParcels from "../pages/MyParcels";
 
 export const router = createBrowserRouter([
   {
@@ -73,6 +75,20 @@ export const router = createBrowserRouter([
       {
         path: "/resetPassword",
         element: <ResetPassword></ResetPassword>,
+      },
+    ],
+  },
+  {
+    path: "/dashBoard",
+    element: (
+      <PrivateRoutes>
+        <Dashboard></Dashboard>
+      </PrivateRoutes>
+    ),
+    children: [
+      {
+        path: "myParcels",
+        element: <MyParcels></MyParcels>,
       },
     ],
   },

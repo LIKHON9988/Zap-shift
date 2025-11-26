@@ -7,12 +7,12 @@ const Reviews = ({ reviews }) => {
   const allReviews = use(reviews);
 
   return (
-    <div className=" mx-3 md:mx-0 mb-5">
+    <div className=" mx-3 md:mx-0 mb-14">
       <div className="text-center space-y-3 mb-6">
-        <h1 className="font-bold text-2xl sm:text-3xl">
+        <h1 className="text-xl md:text-2xl font-semibold text-[#063F30] tracking-tight">
           What our customers are saying
         </h1>
-        <h5 className="text-sm sm:text-base text-gray-600 px-4 sm:px-0">
+        <h5 className="text-gray-600 text-xs md:text-sm mt-1">
           Enhance posture, mobility, and well-being effortlessly with Posture
           Pro. Achieve proper alignment, reduce pain, and strengthen your body
           with ease!

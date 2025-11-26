@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useLoaderData } from "react-router";
 import Swal from "sweetalert2";
+import UseAxios from "../hooks/UseAxios";
+import UseAuth from "../hooks/UseAuth";
 
 const SendParcel = () => {
   const [type, setType] = useState("document");
@@ -13,12 +15,13 @@ const SendParcel = () => {
     formState: { errors },
   } = useForm();
 
+  const { user } = UseAuth();
+  const axiosSequre = UseAxios();
   const serviceCenters = useLoaderData();
 
   // Unique Regions
   const regions = [...new Set(serviceCenters.map((c) => c.region))];
 
-  // Watch changes
   const senderRegion = watch("senderRegion");
   const receiverRegion = watch("receiverRegion");
 
@@ -30,13 +33,7 @@ const SendParcel = () => {
   };
 
   const onSubmit = (data) => {
-    const finalData = {
-      ...data,
-      parcelType: type,
-    };
-
-    console.log("Form Submitted:", finalData);
-
+    // Calculate cost
     const isDocument = type === "document";
     const parcelWeight = parseFloat(data.parcelWeight);
     const isSameDistrict = data.senderDistrict === data.receiverDistrict;
@@ -46,7 +43,7 @@ const SendParcel = () => {
     if (isDocument) {
       cost = isSameDistrict ? 60 : 80;
     } else {
-      if (parcelWeight < 3) {
+      if (parcelWeight <= 3) {
         cost = isSameDistrict ? 110 : 150;
       } else {
         const minCharge = isSameDistrict ? 110 : 150;
@@ -54,14 +51,22 @@ const SendParcel = () => {
         const extraCharge = isSameDistrict
           ? extraWeight * 40
           : extraWeight * 40 + 40;
-
         cost = minCharge + extraCharge;
       }
     }
 
+    // Final data to send
+    const finalData = {
+      ...data,
+      parcelType: type,
+      cost,
+    };
+
+    console.log("Submitting parcel:", finalData);
+
     Swal.fire({
       title: "Agree with the cost?",
-      text: `Tou will be charged ${cost}!`,
+      text: `You will be charged ${cost} Tk!`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -69,11 +74,24 @@ const SendParcel = () => {
       confirmButtonText: "Yes, confirm it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
-          icon: "success",
-        });
+        axiosSequre
+          .post("/parcels", finalData)
+          .then((res) => {
+            console.log("Parcel saved:", res.data);
+            Swal.fire({
+              title: "Success!",
+              text: "Your parcel has been booked successfully.",
+              icon: "success",
+            });
+          })
+          .catch((err) => {
+            console.error("Error posting parcel:", err);
+            Swal.fire({
+              title: "Error!",
+              text: "Something went wrong while booking your parcel.",
+              icon: "error",
+            });
+          });
       }
     });
   };
@@ -156,6 +174,7 @@ const SendParcel = () => {
               <label className="label">Sender Name</label>
               <input
                 className="input w-full"
+                defaultValue={user?.displayName}
                 placeholder="Sender Name"
                 {...register("senderName", {
                   required: "Sender name is required",
@@ -173,6 +192,7 @@ const SendParcel = () => {
               <input
                 type="email"
                 className="input w-full"
+                defaultValue={user?.email}
                 placeholder="Sender Email"
                 {...register("senderEmail", {
                   required: "Sender email is required",
@@ -250,7 +270,6 @@ const SendParcel = () => {
                     </option>
                   ))}
               </select>
-
               {errors.senderDistrict && (
                 <p className="text-red-500 text-sm">
                   {errors.senderDistrict.message}
@@ -370,7 +389,6 @@ const SendParcel = () => {
                     </option>
                   ))}
               </select>
-
               {errors.receiverDistrict && (
                 <p className="text-red-500 text-sm">
                   {errors.receiverDistrict.message}

@@ -34,6 +34,13 @@ const Navbar = () => {
       <li className=" font-bold">
         <NavLink to={"/beArider"}>Be a Rider</NavLink>
       </li>
+      {user && (
+        <>
+          <li>
+            <NavLink to={"/dashBoard/myParcels"}>My Parcels</NavLink>
+          </li>
+        </>
+      )}
     </>
   );
 
