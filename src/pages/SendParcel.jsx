@@ -97,7 +97,7 @@ const SendParcel = () => {
   };
 
   return (
-    <div className="space-y-6 shadow-lg rounded-2xl md:rounded-3xl p-2 md:p-7 bg-[#f8faf2]">
+    <div className="space-y-6 mb-14 mt-10 shadow-lg rounded-2xl md:rounded-3xl p-2 md:p-7 bg-[#f8faf2]">
       <h1 className="font-bold text-3xl text-[#063F30]">Send A Parcel</h1>
       <p className="text-gray-600">Enter your parcel details</p>
       <hr className="border-gray-300" />

@@ -22,7 +22,7 @@ const Coverage = () => {
   };
 
   return (
-    <div className="space-y-6 shadow-lg rounded-2xl md:rounded-3xl p-2 md:p-7">
+    <div className="space-y-6 shadow-lg rounded-2xl md:rounded-3xl p-2 md:p-7 mb-14">
       <h1 className="font-bold text-3xl text-center">
         We are available in 64 districts
       </h1>

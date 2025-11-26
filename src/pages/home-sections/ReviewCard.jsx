@@ -3,34 +3,34 @@ import { Star } from "lucide-react";
 
 const ReviewCard = ({ review }) => {
   return (
-    <div className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 max-w-md w-full mx-auto group border border-gray-200">
+    <div className="bg-white p-4 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 max-w-sm w-full mx-auto group border border-gray-200">
       {/* Profile */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-3">
         <div className="relative">
           <img
             src={review.user_photoURL}
             alt={review.userName}
-            className="w-16 h-16 rounded-full border-2 border-gray-300 shadow-sm group-hover:scale-105 transition duration-300"
+            className="w-12 h-12 rounded-full border border-gray-300 shadow-sm group-hover:scale-105 transition duration-300"
           />
-          <span className="absolute bottom-0 right-0 bg-green-500 w-3 h-3 rounded-full border border-white"></span>
+          <span className="absolute bottom-0 right-0 bg-green-500 w-2.5 h-2.5 rounded-full border border-white"></span>
         </div>
 
         <div>
-          <h3 className="text-xl font-semibold text-gray-900">
+          <h3 className="text-md font-semibold text-gray-900">
             {review.userName}
           </h3>
-          <p className="text-gray-500 text-sm">
+          <p className="text-gray-500 text-xs">
             {new Date(review.date).toLocaleDateString()}
           </p>
         </div>
       </div>
 
       {/* Rating */}
-      <div className="flex items-center gap-1 mt-4">
+      <div className="flex items-center gap-1 mt-2">
         {[...Array(5)].map((_, index) => (
           <Star
             key={index}
-            size={20}
+            size={16}
             className={
               index < Math.round(review.ratings)
                 ? "text-yellow-500 fill-yellow-500"
@@ -38,13 +38,13 @@ const ReviewCard = ({ review }) => {
             }
           />
         ))}
-        <span className="ml-2 text-gray-700 text-sm font-medium">
+        <span className="ml-1 text-gray-700 text-xs font-medium">
           {review.ratings}
         </span>
       </div>
 
       {/* Review Text */}
-      <p className="mt-5 text-gray-700 leading-relaxed bg-gray-100 p-4 rounded-xl border border-gray-200 italic">
+      <p className="mt-3 text-gray-700 leading-relaxed bg-gray-100 p-3 rounded-lg border border-gray-200 italic text-sm">
         “{review.review}”
       </p>
     </div>

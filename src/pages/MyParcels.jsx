@@ -4,10 +4,12 @@ import UseAuth from "../hooks/UseAuth";
 import UseAxios from "../hooks/UseAxios";
 import { FilePen, Loader2, ScanSearch, Trash2 } from "lucide-react";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router";
 
 const MyParcels = () => {
   const { user } = UseAuth();
   const axiosSecure = UseAxios();
+  const navigate = useNavigate();
 
   const {
     data: parcels = [],
@@ -73,6 +75,12 @@ const MyParcels = () => {
 
   return (
     <div className="p-4 md:p-6 max-w-6xl mx-auto">
+      <button
+        onClick={() => navigate(-1)}
+        className="mb-6 inline-flex items-center gap-2 px-4 py-2 text-sm font-medium bg-[#CAEB66] hover:bg-[#b0d65b] rounded-xl transition-all duration-200"
+      >
+        ← Back
+      </button>
       {/* Header */}
       <div className="mb-6">
         <h1 className="text-2xl md:text-3xl font-bold tracking-tight">
@@ -122,10 +130,20 @@ const MyParcels = () => {
                   <td className="py-3 px-4 text-sm">{parcel.cost}</td>
 
                   <td className="py-3 px-4 text-sm flex items-center gap-4">
-                    <button className="btn btn-xs">
+                    <button
+                      className="btn btn-xs"
+                      onClick={() =>
+                        navigate(`/dashBoard/parcel/${parcel._id}`)
+                      }
+                    >
                       <ScanSearch />
                     </button>
-                    <button className="btn btn-xs">
+                    <button
+                      className="btn btn-xs"
+                      onClick={() =>
+                        navigate(`/dashBoard/parcel/${parcel._id}/edit`)
+                      }
+                    >
                       <FilePen />
                     </button>
                     <button
@@ -180,10 +198,18 @@ const MyParcels = () => {
 
                 {/* Action Buttons */}
                 <div className="flex items-center gap-4 pt-2 border-t mt-3">
-                  <button className="btn btn-xs">
+                  <button
+                    className="btn btn-xs"
+                    onClick={() => navigate(`/dashBoard/parcel/${parcel._id}`)}
+                  >
                     <ScanSearch size={16} />
                   </button>
-                  <button className="btn btn-xs">
+                  <button
+                    className="btn btn-xs"
+                    onClick={() =>
+                      navigate(`/dashBoard/parcel/${parcel._id}/edit`)
+                    }
+                  >
                     <FilePen size={16} />
                   </button>
                   <button

@@ -14,7 +14,12 @@ const brandLogos = [brand1, brand2, brand3, brand4, brand5, brand6, brand7];
 
 const Helped = () => {
   return (
-    <>
+    <div>
+      <div>
+        <p className="text-xl  font-semibold text-gray-600 tracking-tight text-center mb-10">
+          We've helped thousands of sales teams
+        </p>
+      </div>
       <Swiper
         className="mb-24"
         loop={true}
@@ -34,7 +39,7 @@ const Helped = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-    </>
+    </div>
   );
 };
 

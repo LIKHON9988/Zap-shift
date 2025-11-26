@@ -35,7 +35,7 @@ const AboutSection = () => {
   const tabs = ["Story", "Mission", "Success", "Team & Others"];
 
   return (
-    <div className="h-full md:h-[70vh] py-16 space-y-10 shadow-lg rounded-3xl p-5 mx-2 md:mx-0">
+    <div className="h-full md:h-[70vh] py-16 space-y-10 shadow-lg rounded-3xl p-5 mx-2 md:mx-0 mb-14">
       {/* Title */}
       <div className="space-y-3">
         <h1 className="text-4xl font-bold text-[#063F30]">About Us</h1>

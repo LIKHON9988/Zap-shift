@@ -7,13 +7,15 @@ import AuthLayout from "../Layout/AuthLayout";
 import PrivateRoutes from "../routes/PrivateRoutes";
 import SignUp from "../pages/SignUp";
 import LogIn from "../pages/LogIn";
-import BeArider from "../pages/BeArider";
+
 import EnterCode from "../pages/EnterCode";
 import ResetPassword from "../pages/ResetPassword";
 import ForgotPassword from "../pages/ForgotPassword";
 import SendParcel from "../pages/SendParcel";
 import Dashboard from "../Layout/Dashboard";
 import MyParcels from "../pages/MyParcels";
+import ParcelDetails from "../pages/dashboard/ParcelDetails";
+import ParcelEdit from "../pages/dashboard/ParcelEdit";
 
 export const router = createBrowserRouter([
   {
@@ -33,14 +35,7 @@ export const router = createBrowserRouter([
         element: <Coverage></Coverage>,
         loader: () => fetch("/warehouses.json").then((res) => res.json()),
       },
-      {
-        path: "/beArider",
-        element: (
-          <PrivateRoutes>
-            <BeArider></BeArider>
-          </PrivateRoutes>
-        ),
-      },
+
       {
         path: "/sendParcel",
         element: (
@@ -89,6 +84,14 @@ export const router = createBrowserRouter([
       {
         path: "myParcels",
         element: <MyParcels></MyParcels>,
+      },
+      {
+        path: "parcel/:id",
+        element: <ParcelDetails></ParcelDetails>,
+      },
+      {
+        path: "parcel/:id/edit",
+        element: <ParcelEdit></ParcelEdit>,
       },
     ],
   },

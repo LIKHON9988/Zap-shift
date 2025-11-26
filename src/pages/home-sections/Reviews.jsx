@@ -24,7 +24,7 @@ const Reviews = ({ reviews }) => {
         loop={true}
         grabCursor={true}
         centeredSlides={true}
-        slidesPerView={4} // DESKTOP DEFAULT (unchanged)
+        slidesPerView={4}
         coverflowEffect={{
           rotate: 30,
           stretch: "50%",
@@ -41,19 +41,17 @@ const Reviews = ({ reviews }) => {
         modules={[EffectCoverflow, Pagination, Autoplay]}
         className="mySwiper py-10"
         breakpoints={{
-          /** 📱 UNIQUE MOBILE LOOK */
           0: {
             slidesPerView: 1.1,
             coverflowEffect: {
-              rotate: 18, // slight tilt
-              stretch: 30, // soft spacing
-              depth: 160, // mild 3D
-              scale: 0.88, // smaller center card
+              rotate: 18,
+              stretch: 30,
+              depth: 160,
+              scale: 0.88,
               slideShadows: true,
             },
           },
 
-          /** 📱 Larger Phones */
           480: {
             slidesPerView: 1.2,
             coverflowEffect: {
@@ -65,14 +63,12 @@ const Reviews = ({ reviews }) => {
             },
           },
 
-          /** Tablet (same feel as before, not changing desktop) */
           768: {
             slidesPerView: 2,
           },
 
-          /** DESKTOP — DO NOT TOUCH */
           1024: {
-            slidesPerView: 4,
+            slidesPerView: 2,
           },
         }}
       >
