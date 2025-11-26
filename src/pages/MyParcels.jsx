@@ -168,7 +168,7 @@ const MyParcels = () => {
             </tbody>
           </table>
 
-          {/* 📱 MOBILE VERSION */}
+          {/*  MOBILE VERSION */}
           <div className="md:hidden p-4 space-y-4">
             {parcels.map((parcel, index) => (
               <div
